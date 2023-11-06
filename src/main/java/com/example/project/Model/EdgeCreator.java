@@ -69,9 +69,11 @@ public class EdgeCreator {
     }
     private static HashMap<String,CreatedEdge> creatEdge(Default_Edge incoming, Default_Edge outgoing,String tag,HashMap<String,CreatedEdge> createdEdgeHashMap) throws Exception {
         try{
-            CreatedEdge created_edge = new CreatedEdge(incoming.getId() + "_" + outgoing.getId(), incoming,
+            String inc = incoming.getU_id() + " " + incoming.getV_id();
+            String out = outgoing.getU_id() + " " + outgoing.getV_id();
+            CreatedEdge created_edge = new CreatedEdge(inc + "_" + out, incoming,
                                                         outgoing, tag);
-            createdEdgeHashMap.put(incoming.getId() + "_" + outgoing.getId(),created_edge);
+            createdEdgeHashMap.put(inc + "_" + out,created_edge);
             return createdEdgeHashMap;
 
         }catch (Exception e){
