@@ -69,7 +69,7 @@ public class WeightedShortestPath {
         List<String> osmids = new ArrayList<>();
         for (Default_Edge edge:shortestPath.getVertexList()){
             if(edge.getOsmid() != null) {
-                osmids.add(String.valueOf(edge.getId()));
+                osmids.add(String.valueOf(edge.getOsmid()));
             }
         }
         return osmids;

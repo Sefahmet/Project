@@ -62,6 +62,38 @@ public class Default_Edge extends DefaultWeightedEdge {
 
 
         }
+        public Map<Default_Edge, Double> getOrderedAngles(List<Default_Edge> outgoings,Boolean isIncomings) {
+                // Bu kenarın bitiş noktasının koordinatları
+                if(!isIncomings){
+                        return this.getOrderedAngles(outgoings);
+                }
+
+                double x1 = u.getEast();
+                double y1 = u.getNorth();
+
+                // Bu kenarın başlangıç noktasının koordinatları
+                double x2 = v.getEast();
+                double y2 = v.getNorth();
+
+                // Sonuçları tutacak bir Map oluştur
+                Map<Default_Edge, Double> angles = new HashMap<>();
+
+                // Diğer kenarlar üzerinde dön
+                for (Default_Edge edge : outgoings) {
+                        // Diğer kenarın başlangıç ve bitiş koordinatları
+                        double x3 = edge.v.getEast();
+                        double y3 = edge.v.getNorth();
+                        double x4 = edge.u.getEast();
+                        double y4 = edge.u.getNorth();
+
+                        // Açı hesaplama formülü
+                        double angle = calculateAngle(x1, y1, x2, y2, x3, y3, x4, y4);
+
+                        angles.put(edge, angle);
+                }
+
+                return angles;
+        }
         public Map<Default_Edge, Double> getOrderedAngles(List<Default_Edge> outgoings) {
                 // Bu kenarın bitiş noktasının koordinatları
                 double x1 = u.getEast();
@@ -91,7 +123,7 @@ public class Default_Edge extends DefaultWeightedEdge {
                 return angles;
         }
 
-        private double calculateAngle(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+        private static double calculateAngle(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
                 // İlk kenarın vektörünü hesaplayın
                 double vector1x = x2 - x1;
                 double vector1y = y2 - y1;

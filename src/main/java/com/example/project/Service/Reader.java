@@ -83,7 +83,7 @@ public class Reader {
                     List<Default_Edge> outgoings= new ArrayList<>();
                     List<Default_Edge> incomings= new ArrayList<>();
                     for(Default_Edge edge2:edges.values()){
-                        if (edge1.getId()!=edge2.getId()){
+                        if ((edge1.getV()!=edge2.getU()) || (edge1.getU()!=edge2.getV())){
                             if(edge1.getV()==edge2.getU()){
                                 outgoings.add(edge2);
                             }
@@ -119,21 +119,16 @@ public class Reader {
         private static HashMap<String, CreatedEdge>  createCreatedEdges(HashMap<String, CreatedEdge> createdEdgeHashMap,HashMap<String, Default_Edge> edges){
             try {
                 File file = new File(path+"/createdEdge.txt");
-                System.out.println(file.getPath());
                 BufferedReader reader = new BufferedReader(new FileReader(file));
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
                     String[] values = line.split(",");
                     String createdEdgeID = values[0];
                     String incomingEdgeID = values[1];
                     String outgoingEdgeID = values[2];
-                    System.out.println(incomingEdgeID);
-                    System.out.println(outgoingEdgeID);
                     Default_Edge incomingEdge = edges.get(incomingEdgeID);
                     Default_Edge outgoingEdge = edges.get(outgoingEdgeID);
-                    System.out.println(incomingEdge);
                     String turnCost = values[3];
                     createdEdgeHashMap.put(createdEdgeID,new CreatedEdge(createdEdgeID,incomingEdge,outgoingEdge,turnCost));
 
@@ -209,8 +204,10 @@ public class Reader {
                     edgeHashMap.put(u_id +" "+v_id,edge);
                     if(!oneWay){
                         slope = Decider.slopeDecider((u.getElevation()-v.getElevation())/length);
+
                         edge = new Default_Edge(id,osmid,roadType,name,v_id,u_id,v,u,false,maxSpeedWeight,length,slope);
                         edgeHashMap.put(v_id +" "+u_id,edge);
+
                     }
 
                     i++;

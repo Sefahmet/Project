@@ -28,7 +28,7 @@ public class EdgeCreator {
         }
         else{
             Map<Default_Edge, Double> outgoingOrderedAngle = incoming.getOrderedAngles(outgoings);
-            Map<Default_Edge, Double> incomingOrderedAngles = incoming.getOrderedAngles(outgoings);
+            Map<Default_Edge, Double> incomingOrderedAngles = incoming.getOrderedAngles(incomings,true);
             Double min_incoming_angle = Double.MAX_VALUE;
             for(Double value : incomingOrderedAngles.values()){
                 if (value<min_incoming_angle){
@@ -38,7 +38,7 @@ public class EdgeCreator {
 
             for(Default_Edge outgoingEdge:outgoingOrderedAngle.keySet()){
                 Double angle = outgoingOrderedAngle.get(outgoingEdge);
-                if (180<angle & angle<320 & angle>min_incoming_angle){
+                if (180<angle & angle<340 & angle>min_incoming_angle){
                     createdEdgeHashMap =creatEdge(incoming,outgoingEdge,"Left",createdEdgeHashMap);
 
                 }else{
