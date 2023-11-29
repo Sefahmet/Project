@@ -21,11 +21,11 @@ public class EdgeCreator {
             }
         }
 
-        else if(isAllNonConsideredEdge(incoming,outgoings,incomings)){
+        /*else if(isAllNonConsideredEdge(incoming,outgoings,incomings)){
             for (Default_Edge outgoing: outgoings) {
                 createdEdgeHashMap =creatEdge(incoming,outgoing,"Not_Considered",createdEdgeHashMap);
             }
-        }
+        }*/
         else{
             Map<Default_Edge, Double> outgoingOrderedAngle = incoming.getOrderedAngles(outgoings);
             Map<Default_Edge, Double> incomingOrderedAngles = incoming.getOrderedAngles(incomings,true);

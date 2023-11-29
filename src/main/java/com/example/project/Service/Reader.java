@@ -75,7 +75,7 @@ public class Reader {
                     Double s = i*100.0/size;
                     i++;
 
-                    if(s.intValue() == d){
+                    if(s.intValue() >= d){
                         System.out.println(d +"%  completed");
                         d += 5;
 
@@ -104,6 +104,7 @@ public class Reader {
             }
 
 
+            setGreenaryValues(edges);
 
             graphFeatures.setCreatedEdgesHashMap(createdEdgeHashMap);
 
@@ -114,6 +115,22 @@ public class Reader {
 
             return graphFeatures;
 
+        }
+        private static void setGreenaryValues(HashMap<String, Default_Edge> edgeHashmap){
+        try{
+            File file = new File(path+"/greenary.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(",");
+                edgeHashmap.get(values[0]).setGreenness(Double.valueOf(values[1]));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         }
 
         private static HashMap<String, CreatedEdge>  createCreatedEdges(HashMap<String, CreatedEdge> createdEdgeHashMap,HashMap<String, Default_Edge> edges){
@@ -366,13 +383,15 @@ public class Reader {
             Double distance = edge.getDistance(); // Distance as meter (weight)
             Double slope = edge.getSlope();  // Normalized slope weight
             Double turnLeft = Decider.turningCostDecider(createdEdge.getTurningCost()); // weight of turning cost
+            Double greenary = Decider.greeneryDecider(edge.getGreenness());
             // Weight of user selections
             Double wDistance = weight.getLength_weight();
             Double wMaxSpeed = weight.getMax_speed_weight_weight();
             Double wSlope = weight.getSlope_weight();
             Double wTurnLeft =  weight.getTurning_cost_weight();
+            Double wGreenary =  weight.getGreenary_weight();
 
-            Double combinedWeight = distance *(wDistance+ wMaxSpeed*maxSpeed+ wSlope * slope) + turnLeft*wTurnLeft;
+            Double combinedWeight = distance *(wDistance+ wMaxSpeed*maxSpeed+ wSlope * slope+ wGreenary * greenary) + turnLeft*wTurnLeft;
 
             return combinedWeight;
 
@@ -383,6 +402,7 @@ public class Reader {
         return null;
 
     }
+
     public static Double setEdgeWeight(CreatedEdge createdEdge){
             try{
                 Weight weight =  Weight.getInstance();

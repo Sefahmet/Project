@@ -39,12 +39,13 @@ public class WeightedShortestPathController {
                                                                @Valid @RequestParam double wLength,
                                                                @Valid @RequestParam double wSlope,
                                                                @Valid @RequestParam double wMaxSpeed,
-                                                               @Valid @RequestParam double wTurnLeft) throws IOException {
+                                                               @Valid @RequestParam double wTurnLeft,
+                                                               @Valid @RequestParam double wGreenary) throws IOException {
 
         Coordinate p1 = new Coordinate(lat1, lon1);
         Coordinate p2 = new Coordinate(lat2, lon2);
         List<Coordinate> coordinates = WeightedShortestPath.shortestPathService(lat1, lon1, lat2, lon2,
-                wLength, wSlope, wMaxSpeed, wTurnLeft);
+                wLength, wSlope, wMaxSpeed, wTurnLeft,wGreenary);
 
 
         coordinates.add(0,p1);
@@ -69,7 +70,7 @@ public class WeightedShortestPathController {
         Coordinate p1 = new Coordinate(lat1, lon1);
         Coordinate p2 = new Coordinate(lat2, lon2);
         List<Coordinate> coordinates = WeightedShortestPath.shortestPathService(lat1, lon1, lat2, lon2,
-                0, 0, 0, 0);
+                0, 0, 0, 0,0);
 
 
         coordinates.add(0,p1);
@@ -92,12 +93,13 @@ public class WeightedShortestPathController {
                                                                @Valid @RequestParam double wLength,
                                                                @Valid @RequestParam double wSlope,
                                                                @Valid @RequestParam double wMaxSpeed,
-                                                               @Valid @RequestParam double wTurnLeft) throws IOException {
+                                                               @Valid @RequestParam double wTurnLeft,
+                                                               @Valid @RequestParam double wGreenary) throws IOException {
 
         Coordinate p1 = new Coordinate(lat1, lon1);
         Coordinate p2 = new Coordinate(lat2, lon2);
         List<String> coordinates = WeightedShortestPath.shortestPathServiceOSMID(lat1, lon1, lat2, lon2,
-                wLength, wSlope, wMaxSpeed, wTurnLeft);
+                wLength, wSlope, wMaxSpeed, wTurnLeft,wGreenary);
 
 
 

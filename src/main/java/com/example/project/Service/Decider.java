@@ -32,10 +32,19 @@ public class Decider {
                 return 1.0;
         }
     }
+    public static Double greeneryDecider(Double greenary){
+        if(greenary<=0){
+            return 1.0;
+        }else {
+            double f = 1 - Math.exp( -3* greenary/555);
+            double normalizationValue = 1 - Math.exp(-3);
+            return f/normalizationValue;
+        }
+    }
     public static Double turningCostDecider(String turningType){
         Double turningCost;
-        Double Constant = 0.1;
-        Double leftCost = 30.0;
+        Double Constant = 0.0;
+        Double leftCost = 300.0;
 
         switch (turningType) {
             case "Right":
@@ -81,10 +90,13 @@ public class Decider {
 
         double slope_per = slope *100;
         if (slope_per<=-3){
-            return 0.1;
+            return 0.0;
         }
         else if (slope_per<15) {
-            return 0.1+(slope_per+3.0)/18.0;
+            double slpWeight = Math.pow(slope_per+3,1.5) ;
+            double normalizationValue = Math.pow(15+3,1.5);
+
+            return slpWeight/normalizationValue;
         }
         else{
             return 1.0;

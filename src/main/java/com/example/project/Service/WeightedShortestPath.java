@@ -27,9 +27,10 @@ public class WeightedShortestPath {
                                                                             double wLength,
                                                                             double wSlope,
                                                                             double wMaxSpeed,
-                                                                            double wTurnLeft){
+                                                                            double wTurnLeft,
+                                                                            double wGreenary){
 
-        Weight weight = new Weight(wLength,wSlope,wMaxSpeed,wTurnLeft);
+        Weight weight = new Weight(wLength,wSlope,wMaxSpeed,wTurnLeft,wGreenary);
         MyDataSingleton myDataSingleton = new MyDataSingleton();
         if (weight != myDataSingleton.getWeight()){
             myDataSingleton.setWeight(weight);
@@ -52,9 +53,9 @@ public class WeightedShortestPath {
                                                         double wLength,
                                                         double wSlope,
                                                         double wMaxSpeed,
-                                                        double wTurnLeft){
+                                                        double wTurnLeft,double wGreenary){
 
-        Weight weight = new Weight(wLength,wSlope,wMaxSpeed,wTurnLeft);
+        Weight weight = new Weight(wLength,wSlope,wMaxSpeed,wTurnLeft,wGreenary);
         MyDataSingleton myDataSingleton = new MyDataSingleton();
         if (weight != myDataSingleton.getWeight()){
             myDataSingleton.setWeight(weight);
