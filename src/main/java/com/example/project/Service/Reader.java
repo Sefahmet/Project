@@ -1,9 +1,7 @@
 package com.example.project.Service;
 
-import com.example.project.DataHolder.MyDataSingleton;
 import com.example.project.Entity.*;
 import com.example.project.Model.EdgeCreator;
-import com.example.project.Model.GraphCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,11 +10,7 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.util.ResourceUtils;
 
-
-import javax.sound.midi.Soundbank;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -61,7 +55,6 @@ public class Reader {
             HashMap<String, CreatedEdge> createdEdgeHashMap = new HashMap<>();
 
             File  file = new File(path + "/createdEdge.txt");
-        System.out.println(file.getPath());
             if(file.exists()){
                 createdEdgeHashMap = createCreatedEdges(createdEdgeHashMap,edges);
 
@@ -111,7 +104,6 @@ public class Reader {
 
             Graph<Default_Edge, DefaultWeightedEdge> graph = createGraph(edges.values(), createdEdgeHashMap.values());
             graphFeatures.setGraph(graph);
-            System.out.println("Graph Created, Program Ready for Running");
 
             return graphFeatures;
 
@@ -459,7 +451,6 @@ public class Reader {
         try {
             String fileName = "/createdEdge.txt";
             File file = new File(path+fileName);
-            System.out.println(file.getPath());
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
             for (String key : createdEdgeHashMap.keySet()) {

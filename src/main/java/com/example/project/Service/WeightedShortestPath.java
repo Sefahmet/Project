@@ -2,20 +2,16 @@ package com.example.project.Service;
 
 import com.example.project.DataHolder.MyDataSingleton;
 import com.example.project.Entity.*;
-import geotrellis.proj4.CRS;
-import geotrellis.proj4.Transform;
-import lombok.Builder;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.locationtech.jts.geom.Coordinate;
 import org.springframework.stereotype.Service;
-import scala.Tuple2;
+import org.locationtech.proj4j.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -196,12 +192,23 @@ public class WeightedShortestPath {
         return null;
     }
     public static Coordinate LatLon2EN (double lat,double lon){
+        CRSFactory crsFactory = new CRSFactory();
+        CoordinateReferenceSystem sourceCRS = crsFactory.createFromName("EPSG:4326");
+        CoordinateReferenceSystem targetCRS = crsFactory.createFromName("EPSG:3044");
 
-        CRS epsg3044 = CRS.fromEpsgCode(3044);
-        CRS wgs84 = CRS.fromEpsgCode(4326);
-        var fromWgs84 = Transform.apply(wgs84, epsg3044);
-        Tuple2<Object, Object> latlon2EN = fromWgs84.apply(lat  , lon);
-        return new Coordinate((double) latlon2EN._1(),(double) latlon2EN._2());
+        // Create a CoordinateTransform instance
+        CoordinateTransform transform = new BasicCoordinateTransform(sourceCRS, targetCRS);
+
+        // Transform coordinates
+        ProjCoordinate sourceCoord = new ProjCoordinate(lon, lat);
+        ProjCoordinate targetCoord = new ProjCoordinate();
+        transform.transform(sourceCoord, targetCoord);
+
+        // Extract transformed coordinates
+        double y = targetCoord.y;
+        double x = targetCoord.x;
+
+        return new Coordinate(x, y);
 
 
     }
@@ -237,15 +244,23 @@ public class WeightedShortestPath {
     public static Coordinate EN2LatLon (double x,double y){
 
 
-        CRS epsg3044 = CRS.fromEpsgCode(3044);
-        CRS wgs84 = CRS.fromEpsgCode(4326);
+        CRSFactory crsFactory = new CRSFactory();
+        CoordinateReferenceSystem sourceCRS = crsFactory.createFromName("EPSG:3044");
+        CoordinateReferenceSystem targetCRS = crsFactory.createFromName("EPSG:4326");
 
-        var toWgs84 = Transform.apply(epsg3044, wgs84);
+        // Create a CoordinateTransform instance
+        CoordinateTransform transform = new BasicCoordinateTransform(sourceCRS, targetCRS);
 
+        // Transform coordinates
+        ProjCoordinate sourceCoord = new ProjCoordinate(x, y);
+        ProjCoordinate targetCoord = new ProjCoordinate();
+        transform.transform(sourceCoord, targetCoord);
 
-        Tuple2<Object, Object> EN2LatLon = toWgs84.apply(x,y);
+        // Extract transformed coordinates
+        double lat1 = targetCoord.y;
+        double lon1 = targetCoord.x;
 
-        return new Coordinate((double)EN2LatLon._2(),(double)EN2LatLon._1());
+        return new Coordinate(lat1, lon1);
 
 
     }

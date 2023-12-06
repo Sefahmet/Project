@@ -1,13 +1,12 @@
 package com.example.project;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.project.DataHolder.GreenaryData;
-import com.example.project.Entity.CreatedEdge;
 import com.example.project.Entity.Default_Edge;
 import com.example.project.Entity.Default_Node;
 import com.example.project.Entity.GraphFeatures;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.impl.CoordinateArraySequence;
 import org.locationtech.jts.index.strtree.STRtree;
@@ -228,7 +227,7 @@ public class Test {
                 xmin = x - Math.abs(visibilityDistance*Math.cos(Math.toRadians(left)));
                 break;
             default:
-                System.out.println("Geçersiz değer");
+                System.out.println("Case ERROR");
         }
 
 

@@ -1,31 +1,26 @@
 package com.example.project.Entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-@NoArgsConstructor
 public class Default_Edge extends DefaultWeightedEdge {
 
-        @Getter @Setter private int     id;
-        @Getter @Setter private Long    osmid;
-        @Getter @Setter private String  roadType;
-        @Getter @Setter private String  name;
-        @Getter @Setter private Long    u_id;
-        @Getter @Setter private Long    v_id;
-        @Getter @Setter private Default_Node u;
-        @Getter @Setter private Default_Node v;
-        @Getter @Setter private boolean oneWay;
-        @Getter @Setter private Double  maxSpeed;
-        @Getter @Setter private Double  distance;
-        @Getter @Setter private Double  slope;
-        @Getter @Setter private Double  greenness;
+        private int     id;
+        private Long    osmid;
+        private String  roadType;
+        private String  name;
+        private Long    u_id;
+        private Long    v_id;
+        private Default_Node u;
+        private Default_Node v;
+        private boolean oneWay;
+        private Double  maxSpeed;
+        private Double  distance;
+        private Double  slope;
+        private Double  greenness;
 
 
         public Default_Edge(int fid, Long osmid,String roadType, String name, Long u_id, Long v_id, Default_Node u,
@@ -94,6 +89,9 @@ public class Default_Edge extends DefaultWeightedEdge {
 
                 return angles;
         }
+
+
+
         public Map<Default_Edge, Double> getOrderedAngles(List<Default_Edge> outgoings) {
                 // Bu kenarın bitiş noktasının koordinatları
                 double x1 = u.getEast();
@@ -152,6 +150,110 @@ public class Default_Edge extends DefaultWeightedEdge {
         public void printEdgeT(){
                 System.out.printf("| %-4d | %-10d | %-25s | %-14s | %-12d | %-12d | %-5b |%-10f |%-10f |%-10f |%n",
                                        id, osmid, name, roadType, u_id, v_id, oneWay,maxSpeed,slope,distance);
+        }
+
+        public int getId() {
+                return id;
+        }
+
+        public void setId(int id) {
+                this.id = id;
+        }
+
+        public Long getOsmid() {
+                return osmid;
+        }
+
+        public void setOsmid(Long osmid) {
+                this.osmid = osmid;
+        }
+
+        public String getRoadType() {
+                return roadType;
+        }
+
+        public void setRoadType(String roadType) {
+                this.roadType = roadType;
+        }
+
+        public String getName() {
+                return name;
+        }
+
+        public void setName(String name) {
+                this.name = name;
+        }
+
+        public Long getU_id() {
+                return u_id;
+        }
+
+        public void setU_id(Long u_id) {
+                this.u_id = u_id;
+        }
+
+        public Long getV_id() {
+                return v_id;
+        }
+
+        public void setV_id(Long v_id) {
+                this.v_id = v_id;
+        }
+
+        public Default_Node getU() {
+                return u;
+        }
+
+        public void setU(Default_Node u) {
+                this.u = u;
+        }
+
+        public Default_Node getV() {
+                return v;
+        }
+
+        public void setV(Default_Node v) {
+                this.v = v;
+        }
+
+        public boolean isOneWay() {
+                return oneWay;
+        }
+
+        public void setOneWay(boolean oneWay) {
+                this.oneWay = oneWay;
+        }
+
+        public Double getMaxSpeed() {
+                return maxSpeed;
+        }
+
+        public void setMaxSpeed(Double maxSpeed) {
+                this.maxSpeed = maxSpeed;
+        }
+
+        public Double getDistance() {
+                return distance;
+        }
+
+        public void setDistance(Double distance) {
+                this.distance = distance;
+        }
+
+        public Double getSlope() {
+                return slope;
+        }
+
+        public void setSlope(Double slope) {
+                this.slope = slope;
+        }
+
+        public Double getGreenness() {
+                return greenness;
+        }
+
+        public void setGreenness(Double greenness) {
+                this.greenness = greenness;
         }
 }
 

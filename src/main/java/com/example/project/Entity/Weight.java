@@ -1,19 +1,16 @@
 package com.example.project.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.IOException;
 public class Weight {
     /*This weight are representing users selections. These are not edge weight.*/
 
-    @Getter @Setter private Double length_weight;
-    @Getter @Setter private Double slope_weight;
-    @Getter @Setter private Double max_speed_weight_weight;
-    @Getter @Setter private Double turning_cost_weight;
-    @Getter @Setter private Double greenary_weight;
-    @Getter @Setter private static Weight instance;
+    private Double length_weight;
+    private Double slope_weight;
+    private Double max_speed_weight_weight;
+    private Double turning_cost_weight;
+    private Double greenary_weight;
+    private static Weight instance;
     public static Weight getInstance() throws IOException {
         if (instance == null){
             instance = new Weight(0.2,0.2,0.2,0.2,0.2);
@@ -21,7 +18,11 @@ public class Weight {
         return instance;
     }
 
-    public Weight(Double length_weight, Double slope_weight, Double max_speed_weight_weight, Double turning_cost_weight,Double greenary_weight) {
+    public static void setInstance(Weight instance) {
+        Weight.instance = instance;
+    }
+
+    public Weight(Double length_weight, Double slope_weight, Double max_speed_weight_weight, Double turning_cost_weight, Double greenary_weight) {
         double sumWeights = length_weight + slope_weight + max_speed_weight_weight + turning_cost_weight+greenary_weight;
         if(length_weight + slope_weight + max_speed_weight_weight + greenary_weight == 0 && turning_cost_weight>0){
             this.length_weight = 0.0;
@@ -47,4 +48,23 @@ public class Weight {
 
     }
 
+    public Double getGreenary_weight() {
+        return greenary_weight;
+    }
+
+    public Double getLength_weight() {
+        return length_weight;
+    }
+
+    public Double getMax_speed_weight_weight() {
+        return max_speed_weight_weight;
+    }
+
+    public Double getSlope_weight() {
+        return slope_weight;
+    }
+
+    public Double getTurning_cost_weight() {
+        return turning_cost_weight;
+    }
 }

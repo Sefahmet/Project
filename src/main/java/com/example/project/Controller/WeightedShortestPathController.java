@@ -1,46 +1,32 @@
 package com.example.project.Controller;
 
 
-import com.example.project.DataHolder.MyDataSingleton;
-import com.example.project.Entity.CreatedEdge;
-import com.example.project.Entity.Default_Edge;
-import com.example.project.Entity.GraphFeatures;
-import com.example.project.Entity.Weight;
 import com.example.project.Service.WeightedShortestPath;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.jgrapht.GraphPath;
 import org.locationtech.jts.geom.Coordinate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.yaml.snakeyaml.error.MarkedYAMLException;
 
-import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
-@Validated
+
 @RestController
-@RequiredArgsConstructor
-@CrossOrigin
-@RequestMapping("/shortestPath")
+@RequestMapping("/Effortless")
 public class WeightedShortestPathController {
-    private final WeightedShortestPath weightedShortestPath;
+    /*private final Class<WeightedShortestPath> weightedShortestPath = WeightedShortestPath.class;*/
+
+
     @GetMapping("/Coordinates")
-    public ResponseEntity<List<Coordinate>> shortestPathGetter(@Valid @RequestParam double lat1,
-                                                               @Valid @RequestParam double lon1,
-                                                               @Valid @RequestParam double lat2,
-                                                               @Valid @RequestParam double lon2,
-                                                               @Valid @RequestParam double wLength,
-                                                               @Valid @RequestParam double wSlope,
-                                                               @Valid @RequestParam double wMaxSpeed,
-                                                               @Valid @RequestParam double wTurnLeft,
-                                                               @Valid @RequestParam double wGreenary) throws IOException {
+    public ResponseEntity<List<Coordinate>> shortestPathGetter(@RequestParam double lat1,
+                                                               @RequestParam double lon1,
+                                                               @RequestParam double lat2,
+                                                               @RequestParam double lon2,
+                                                               @RequestParam double wLength,
+                                                               @RequestParam double wSlope,
+                                                               @RequestParam double wMaxSpeed,
+                                                               @RequestParam double wTurnLeft,
+                                                               @RequestParam double wGreenary) throws IOException {
 
         Coordinate p1 = new Coordinate(lat1, lon1);
         Coordinate p2 = new Coordinate(lat2, lon2);
@@ -60,7 +46,7 @@ public class WeightedShortestPathController {
         }
 
         }
-
+/*
     @GetMapping("/CoordinatesTest")
     public ResponseEntity<List<Coordinate>> shortestPathGetterTest() {
         Double lat1 = 7.1078218;
@@ -110,5 +96,5 @@ public class WeightedShortestPathController {
             return new ResponseEntity("CoordinatesCouldn'tFind", HttpStatus.BAD_REQUEST);
         }
 
-    }
+    }*/
     }
